@@ -1,43 +1,19 @@
-import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
-} from "./ui/Accordion";
+import { getTeamsByLeagueId } from "@/lib/utils";
+import { Card, CardContent, CardHeader } from "./ui/Card";
 
-const getTeams = async () => {
-    try {
-        const res = await fetch("http://localhost:3000/api/teams", {
-            cache: "no-store",
-        });
+export default async function TeamsList({ league_id }) {
+    const { teams } = await getTeamsByLeagueId(league_id);
 
-        if (!res.ok) {
-            throw new Error("Failed to fetch teams");
-        }
-
-        return res.json();
-    } catch (error) {
-        console.log("Error loading teams: ", error);
-    }
-};
-
-export default async function TeamsList() {
-    const { teams } = await getTeams();
-
-    return (
-        <Accordion type="multiple">
-            {teams.map((t) => (
-                <AccordionItem
-                    key={t._id}
-                    value={t.name}
-                    className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start flex-col"
-                >
-                    <AccordionTrigger className="font-bold text-2xl">
-                        {t.name}
-                    </AccordionTrigger>
-                    <AccordionContent>{t.homeCourse}</AccordionContent>
-                </AccordionItem>
-            ))}
-        </Accordion>
-    );
+    return teams?.map((t) => {
+        return (
+            <Card
+                key={t._id}
+                value={t.name}
+                className="p-4  my-3 flex justify-between gap-5 items-start flex-col"
+            >
+                <CardHeader className="font-bold text-2xl">{t.name}</CardHeader>
+                <CardContent>{t.homeCourse}</CardContent>
+            </Card>
+        );
+    });
 }

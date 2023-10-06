@@ -41,10 +41,12 @@ export default async function Welcome() {
                     <CardFooter className="">
                         <Button variant="link" asChild>
                             <Link
+                                className="font-momcake text-3xl"
                                 href="https://discgolf.ultiworld.com/2019/04/08/new-england-team-challenge-brief-history/"
                                 target="_blank"
                             >
-                                Read New England Team Challenge
+                                Read about New England Team Challenge's Brief
+                                History on UltiWorld
                             </Link>
                         </Button>
                     </CardFooter>
@@ -63,7 +65,12 @@ export default async function Welcome() {
                     </CardContent>
                     <CardFooter>
                         <Button variant="link" asChild>
-                            <Link href="/leagues">View Leagues here</Link>
+                            <Link
+                                className="font-momcake text-3xl"
+                                href="/leagues"
+                            >
+                                View Leagues here
+                            </Link>
                         </Button>
                     </CardFooter>
                 </Card>

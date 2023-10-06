@@ -1,10 +1,9 @@
 import mongoose, { Schema } from "mongoose";
 
-const leagueSchema = new Schema(
+export const leagueSchema = new Schema(
     {
-        name: String,
+        name: { type: String, index: { unique: true } },
         region: String,
-        teams: [{ type: Schema.Types.ObjectId, ref: "Team" }],
     },
     {
         timestamps: true,

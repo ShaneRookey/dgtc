@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { createNewLeague } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -18,32 +19,13 @@ export default function AddLeague() {
             return;
         }
 
-        try {
-            const res = await fetch("http://localhost:3000/api/leagues", {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    region,
-                    teams,
-                }),
-            });
-
-            if (res.ok) {
-                router.push("/leagues");
-                router.refresh();
-            } else {
-                throw new Error("Failed to create a league");
-            }
-        } catch (error) {
-            console.log(error);
-        }
+        createNewLeague(name, region, teams).then((res) => {
+            router.push(`/league/${res.created_id}`);
+        });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 m-3 p-5">
             <Input
                 onChange={(e) => setName(e.target.value)}
                 value={name}

@@ -1,14 +1,15 @@
 import mongoose, { Schema } from "mongoose";
 
-const teamSchema = new Schema(
+export const teamSchema = new Schema(
     {
-        name: String,
+        league: String,
+        pool: String,
+        name: { type: String, index: { unique: true } },
         homeCourse: String,
         address: String,
         captainOne: String,
         captainTwo: String,
         captainThree: String,
-        pool: String,
     },
     {
         timestamps: true,

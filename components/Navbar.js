@@ -1,14 +1,46 @@
-import { getSession } from "@auth0/nextjs-auth0";
+"use client";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Darkmode from "./Darkmode";
 import { Button } from "./ui/Button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
-export default async function Navbar() {
-    let user;
-    if (typeof window !== "undefined") {
-        user = await getSession();
-    }
+export default function Navbar() {
+    const renderLoginButton = () => {
+        const { data: session } = useSession();
+        if (session) {
+            return (
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="text-sm border-white border rounded-sm p-2">
+                        User: {session.user.email}
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                        <DropdownMenuItem>
+                            <Link href={`/user/${session.user.id}`}>
+                                My Account
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href="/api/auth/signout">Logout</Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            );
+        }
+        return (
+            <div className="flex gap-5 text-sm p-5">
+                <a href="/api/auth/signin">Login</a>
+                <a href="/register">register</a>
+            </div>
+        );
+    };
+
     return (
         <nav className="flex flex-row justify-start items-center p-5 gap-5 font-momcake text-5xl sticky top-0 bg-inherit">
             <a href="/">
@@ -23,14 +55,9 @@ export default async function Navbar() {
             <Button variant="link" asChild>
                 <Link href="/">Home</Link>
             </Button>
-            <Button variant="link">
-                {user ? (
-                    <a href="/api/auth/logout">Logout</a>
-                ) : (
-                    <a href="/api/auth/login">Login</a>
-                )}
-            </Button>
+
             <Darkmode />
+            {renderLoginButton()}
         </nav>
     );
 }
