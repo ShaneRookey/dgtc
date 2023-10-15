@@ -30,6 +30,8 @@ export default async function UserProfile({ user_id }) {
                 <Input readOnly value={user.updatedAt}></Input>
                 <Label>Team:</Label>
                 <Input readOnly value={user.team}></Input>
+                <Label>Permissions:</Label>
+                <Input readOnly value={user.permissions}></Input>
             </CardContent>
             <CardFooter>
                 Contact support@dgtc.app if you need to edit your email

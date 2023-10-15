@@ -3,7 +3,7 @@ import Team from "@/models/team";
 import { NextResponse } from "next/server";
 
 export async function PUT(request, { params }) {
-    const { id } = params;
+    const { team_id } = params;
     const {
         newName: name,
         newHomeCourse: homeCourse,
@@ -14,7 +14,7 @@ export async function PUT(request, { params }) {
         newPool: pool,
     } = await request.json();
     await connectMongoDB();
-    await Team.findByIdAndUpdate(id, {
+    await Team.findByIdAndUpdate(team_id, {
         name,
         homeCourse,
         address,
