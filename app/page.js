@@ -22,7 +22,7 @@ export default async function Welcome() {
                 />
             </div>
             <div className="flex flex-row justify-center gap-4 p-5">
-                <Card className="w-1/4 h-1/2">
+                <Card>
                     <CardHeader>About</CardHeader>
                     <CardContent>
                         <Image
@@ -51,7 +51,7 @@ export default async function Welcome() {
                         </Button>
                     </CardFooter>
                 </Card>
-                <Card className="w-1/4 h1/2">
+                <Card>
                     <CardHeader>Leagues</CardHeader>
                     <CardContent>
                         <Image

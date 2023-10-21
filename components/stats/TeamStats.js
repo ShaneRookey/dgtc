@@ -1,8 +1,6 @@
-function TeamStats({ team_id }) {
+function TeamStats({ team }) {
     return (
-        <div className="w-2/3 bg-primary text-primary-foreground p-5">
-            {team_id}
-        </div>
+            <h1>{team.name}</h1>
     );
 }
 

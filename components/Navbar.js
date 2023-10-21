@@ -29,6 +29,9 @@ export default function Navbar() {
                         <DropdownMenuItem>
                             <Link href="/api/auth/signout">Logout</Link>
                         </DropdownMenuItem>
+                        <DropdownMenuItem>
+                            <Link href="/myteam">My Team</Link>
+                        </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
             );
