@@ -40,6 +40,7 @@ export default function PoolDashboard({ pool_id }) {
 				</div>
 				<div className="flex flex-col w-fit gap-3 p-5">
 					{teams?.map((team, i) => {
+						const team_id = team._id;
 						return (
 							<div className="flex gap-2 items-center">
 								<div
@@ -51,7 +52,7 @@ export default function PoolDashboard({ pool_id }) {
 								</div>
 								<PermissionWall>
 									<Link
-										href={`${pool_id}/editTeam/${team._id}`}
+										href={`/team/${team_id}/edit`}
 										className="text-primary-foreground"
 									>
 										Edit
