@@ -4,7 +4,8 @@ export const userSchema = new Schema(
     {
         email: { type: String, index: { unique: true } },
         firstName: String,
-        lastName: String
+        lastName: String,
+        editableIds: [String],
     },
     {
         timestamps: true,

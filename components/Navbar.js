@@ -12,31 +12,29 @@ import {
 } from "./ui/dropdown-menu";
 
 export default function Navbar() {
+    const { data: session, status } = useSession();
+
     const renderLoginButton = () => {
-        const { data: session } = useSession();
-        if (session) {
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger className="text-sm border-white border rounded-sm p-2">
-                        User: {session.user.email}
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                        <DropdownMenuItem>
-                            <Link href={`/user/${session.user.id}`}>
-                                My Account
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Link href="/api/auth/signout">Logout</Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            <Link href="/myteam">My Team</Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        }
-        return (
+        return status === "authenticated" ? (
+            <DropdownMenu>
+                <DropdownMenuTrigger className="text-sm border-white border rounded-sm p-2">
+                    User: {session.user.email}
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                    <DropdownMenuItem>
+                        <Link href={`/user/${session.user.id}`}>
+                            My Account
+                        </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Link href="/api/auth/signout">Logout</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                        <Link href="/myteam">My Team</Link>
+                    </DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>
+        ) : (
             <div className="flex gap-5 text-sm p-5">
                 <a href="/api/auth/signin">Login</a>
                 <a href="/register">register</a>
@@ -52,6 +50,7 @@ export default function Navbar() {
                     width={100}
                     height={100}
                     alt="xs_logo"
+                    priority
                 />
             </a>
 
